@@ -6,7 +6,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
-app.secret_key = "hfdsj vfdhsk eunca kaeomca"
+# app.secret_key = "hfdsj vfdhsk eunca kaeomca"
 DATABASE = "C:/Users/18488/OneDrive - Wellington College/13DTS/Maori_Dictionary/maori_dictionary.db"
 
 
@@ -35,3 +35,20 @@ def is_logged_in():
         print("Logged in")
         return True
 
+
+@app.route('/')
+def render_homepage():
+    return render_template('home.html', logged_in=is_logged_in())
+
+
+@app.route('/login')
+def render_login_page():
+    return render_template('login.html', logged_in=is_logged_in())
+
+
+@app.route('/signup')
+def render_signup_page():
+    return render_template('signup.html', logged_in=is_logged_in())
+
+
+app.run(host='0.0.0.0', debug=True)
